@@ -9,7 +9,7 @@ export const ContactList = ({ data, onDeleteConcat }) => {
             data.map(contact => {
              return <li className={css.item} key={contact.id}>
                 <p>{contact.name}:</p>
-               <p>{contact.password}</p>
+               <p>{contact.phone}</p>
                <button className={css.button} type="button" onClick={() => onDeleteConcat(contact.id)}>Delete</button>
               </li>
             })
