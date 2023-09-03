@@ -31,8 +31,6 @@ useEffect(() => {
     const phone = form.elements.number.value;
     const contact = { name: login, phone: phone, id: nanoid() };
     form.reset();
-    // (contacts.items.find(contact => contact.name === login)
-    //   ? alert(`${login} is already in contacts`) : dispatch(addContact(contact)))
     if (contacts.items.find(contact => contact.name === login)) {
       toast.error('Контак вже є')
     } else {
@@ -43,6 +41,7 @@ useEffect(() => {
   }
   const onClickButton = id => {
     dispatch(deleteContactId(id)) 
+    toast.error('Контак видалено')
   }
   const normalisFilter = filter.toLowerCase();
   const filterContacts = contacts.items.filter(

@@ -36,7 +36,8 @@ export const contactsSlice = createSlice({
       })
         builder
           .addCase(deleteContactId.fulfilled, (state, action) => {
-            state.contacts.items = state.contacts.items.filter(contact => contact.id !== action.payload);
+            state.contacts.items = state.contacts.items.filter(contact => contact.id !== action.payload.id);
+  
       })
    
   },
