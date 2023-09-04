@@ -1,14 +1,33 @@
 import React from "react";
 import css from './ContactForm.module.css'
 import PropTypes from 'prop-types';
-const ContactForm = ({onSubmit}) => {
- 
-    // static propTypes = {
-    //  onSubmit: PropTypes.func.isRequired,
-    // };
+import { nanoid } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { selectorContacts } from "redux/contactsRedux";
+import { toast } from "react-hot-toast";
+import { addContact } from "redux/operations";
 
-  
-        return <form className={css.form} onSubmit={onSubmit}>
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectorContacts);
+ 
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const form = evt.currentTarget;
+    const login = form.elements.name.value;
+    const phone = form.elements.number.value;
+    const contact = { name: login, phone: phone, id: nanoid() };
+    form.reset();
+    if (contacts.items.find(contact => contact.name === login)) {
+      toast.error('Контак вже є')
+    } else {
+      dispatch(addContact(contact))
+      toast.success('Контак додано')
+    }
+   
+  }
+
+        return <form className={css.form} onSubmit={handleSubmit}>
         <label>Name <br /><input
   type="text"
   name="name"
