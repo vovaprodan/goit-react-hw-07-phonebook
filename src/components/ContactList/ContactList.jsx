@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from "react";
 import css from './ContactList.module.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +5,7 @@ import { deleteContactId, fetchTasks } from 'redux/operations';
 import { toast } from 'react-hot-toast';
 import { selectorContacts, selectorFilter } from 'redux/contactsRedux';
 
-export const ContactList = ({ data }) => {
+export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectorContacts);
   const filter = useSelector(selectorFilter);
@@ -32,15 +31,10 @@ export const ContactList = ({ data }) => {
             filterContacts.map(contact => {
              return <li className={css.item} key={contact.id}>
                 <p>{contact.name}:</p>
-               <p>{contact.phone}</p>
+               <p>{contact.number}</p>
                <button className={css.button} type="button" onClick={() => onClickButton(contact.id)}>Delete</button>
               </li>
             })
 }
         </ul>
-}
-
-ContactList.propTypes = {
-  data: PropTypes.array,
-  onDeleteConcat: PropTypes.func
 }
